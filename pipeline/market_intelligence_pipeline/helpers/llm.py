@@ -12,12 +12,12 @@ from typing import Generator
 import psycopg
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../../../../.env"))
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../../../.env"))
 
-_DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://postgres:password@localhost:5432/postgres",
-)
+
+def _db_url() -> str:
+    url = os.environ.get("DATABASE_URL", "postgresql://postgres:password@localhost:5432/postgres")
+    return url
 
 
 def log_llm_call(
@@ -41,7 +41,7 @@ def log_llm_call(
 
     status must be one of: 'ok' | 'retry' | 'failed'
     """
-    with psycopg.connect(_DATABASE_URL) as conn:
+    with psycopg.connect(_db_url()) as conn:
         with conn.cursor() as cur:
             cur.execute(
                 """

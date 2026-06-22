@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(uv --version)",
-      "Bash(npx --version)"
+      "Bash(npx --version)",
+      "Bash(npm --version)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"next start\")",
+      "Bash(NEXT_PUBLIC_BASE_PATH=/kci npm run build)",
+      "Bash(curl -s -D - -o /dev/null http://localhost:3000/kci)",
+      "Bash(curl -s -L -o /dev/null -w \"final: %{http_code} %{url_effective}\\\\n\" http://localhost:3000/kci)"
     ]
   }
 }

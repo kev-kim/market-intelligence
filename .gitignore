@@ -26,3 +26,8 @@ $DAGSTER_HOME/
 # OS
 .DS_Store
 *.swp
+
+# Claude
+DEMO.md
+/.claude/*
+CLAUDE.md

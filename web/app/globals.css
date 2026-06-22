@@ -1,0 +1,128 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light — clean institutional paper */
+    --background: 220 20% 98%;
+    --foreground: 222 30% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 30% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 30% 12%;
+
+    --primary: 221 70% 46%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 16% 94%;
+    --secondary-foreground: 222 25% 20%;
+
+    --muted: 220 16% 95%;
+    --muted-foreground: 220 10% 42%;
+
+    --accent: 220 16% 93%;
+    --accent-foreground: 222 25% 18%;
+
+    --destructive: 0 72% 48%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 16% 88%;
+    --input: 220 16% 86%;
+    --ring: 221 70% 46%;
+
+    --conf-high: 152 58% 36%;
+    --conf-med: 38 88% 44%;
+    --conf-low: 0 72% 50%;
+    --positive: 152 58% 36%;
+    --negative: 0 72% 50%;
+    --warning: 38 88% 44%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark — Bloomberg terminal, near-black with cool slate */
+    --background: 222 28% 7%;
+    --foreground: 213 28% 90%;
+
+    --card: 222 24% 10%;
+    --card-foreground: 213 28% 90%;
+
+    --popover: 222 26% 9%;
+    --popover-foreground: 213 28% 90%;
+
+    --primary: 213 90% 62%;
+    --primary-foreground: 222 47% 8%;
+
+    --secondary: 220 18% 16%;
+    --secondary-foreground: 213 20% 86%;
+
+    --muted: 220 18% 14%;
+    --muted-foreground: 217 14% 60%;
+
+    --accent: 220 18% 18%;
+    --accent-foreground: 213 24% 90%;
+
+    --destructive: 0 64% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 218 18% 18%;
+    --input: 218 18% 20%;
+    --ring: 213 90% 62%;
+
+    --conf-high: 152 52% 50%;
+    --conf-med: 40 90% 56%;
+    --conf-low: 2 74% 60%;
+    --positive: 152 52% 50%;
+    --negative: 2 74% 60%;
+    --warning: 40 90% 56%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv01", "tnum";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Tabular numbers everywhere financial */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  /* faint grid texture for the terminal feel */
+  .bg-grid {
+    background-image: linear-gradient(
+        to right,
+        hsl(var(--border) / 0.4) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, hsl(var(--border) / 0.4) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+}

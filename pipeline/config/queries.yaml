@@ -1,0 +1,37 @@
+# Naver News search queries.
+# max_pages_per_query × 100 items/page = results per query per run.
+# At 20 queries × 3 pages = 60 API calls per run (well within 25,000/day quota).
+
+max_pages_per_query: 3
+
+# ─── Named company queries ────────────────────────────────────────────────────
+# Use the most recognisable name: Naver ranks by relevance, not exact match.
+companies:
+  - label: 컬리
+    query: "컬리 투자"
+  - label: 토스
+    query: "토스 비바리퍼블리카"
+  - label: 무신사
+    query: "무신사"
+  - label: 크래프톤
+    query: "크래프톤"
+  - label: 당근마켓
+    query: "당근마켓"
+
+# ─── Broad VC/event keyword queries ──────────────────────────────────────────
+keywords:
+  - "스타트업 시리즈A 투자 유치"
+  - "스타트업 시리즈B 투자 유치"
+  - "스타트업 시리즈C 투자 유치"
+  - "스타트업 시리즈D 투자 유치"
+  - "스타트업 시리즈E 투자 유치"
+  - "스타트업 시리즈F 투자 유치"
+  - "스타트업 프리IPO 투자"
+  - "벤처 투자 유치"
+  - "스타트업 인수합병"
+  - "기업 인수 발표"
+  - "코스닥 상장 추진 스타트업"
+  - "IPO 추진 기업"
+  - "유니콘 기업 투자"
+  - "기업가치 펀딩 라운드"
+  - "스타트업 흑자 전환"
