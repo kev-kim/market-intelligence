@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query"
 import { ChevronRight, History, TrendingDown, TrendingUp } from "lucide-react"
 import { cn, formatDate, pct } from "@/lib/utils"
 import type { Fact } from "@/lib/types"
-import { mockApi } from "@/lib/mock-api"
+import { api } from "@/lib/api"
 import { ConfidenceChip } from "@/components/confidence-chip"
 import { ConfidenceFactorsPanel } from "@/components/confidence-factors"
 import {
@@ -137,7 +137,7 @@ function FactProvenance({
 }) {
   const { data, isLoading } = useQuery({
     queryKey: ["fact-sources", factId],
-    queryFn: () => mockApi.getFactSources(factId),
+    queryFn: () => api.getFactSources(factId),
   })
   if (isLoading || !data)
     return (

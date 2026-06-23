@@ -13,8 +13,8 @@ import {
   Dot,
 } from "recharts"
 import { CheckCircle2, XCircle, BarChart2 } from "lucide-react"
-import { mockApi } from "@/lib/mock-api"
-import type { CalibrationData, CalibrationPoint } from "@/lib/mock-api"
+import { api } from "@/lib/api"
+import type { CalibrationData, CalibrationPoint } from "@/lib/api"
 import { FACT_TYPE_LABEL } from "@/lib/format"
 import { ConfidenceChip } from "@/components/confidence-chip"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -216,7 +216,7 @@ function brierLabel(score: number): string {
 export default function CalibrationPage() {
   const { data, isLoading, isError } = useQuery<CalibrationData>({
     queryKey: ["calibration"],
-    queryFn: () => mockApi.getCalibration(),
+    queryFn: () => api.getCalibration(),
   })
 
   if (isLoading) return <CalibrationSkeleton />

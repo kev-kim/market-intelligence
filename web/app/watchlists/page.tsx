@@ -13,7 +13,7 @@ import {
   BookmarkPlus,
   ChevronRight,
 } from "lucide-react"
-import { mockApi } from "@/lib/mock-api"
+import { api } from "@/lib/api"
 import type { CompanyListItem, Watchlist } from "@/lib/types"
 import { EVENT_TYPE_LABEL } from "@/lib/format"
 import { cn, relativeTime } from "@/lib/utils"
@@ -108,12 +108,12 @@ function AddCompanyDialog({
 
   const { data: allCompanies } = useQuery({
     queryKey: ["companies-all"],
-    queryFn: () => mockApi.listCompanies(),
+    queryFn: () => api.listCompanies(),
   })
 
   const addMutation = useMutation({
     mutationFn: (companyId: string) =>
-      mockApi.addToWatchlist(watchlistId, companyId),
+      api.addToWatchlist(watchlistId, companyId),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["watchlists"] })
     },
@@ -213,7 +213,7 @@ function CreateWatchlistDialog() {
   const [name, setName] = useState("")
 
   const createMutation = useMutation({
-    mutationFn: (n: string) => mockApi.createWatchlist(n),
+    mutationFn: (n: string) => api.createWatchlist(n),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["watchlists"] })
       setOpen(false)
@@ -275,7 +275,7 @@ function RenameWatchlistDialog({
   const [name, setName] = useState(watchlist.name)
 
   const renameMutation = useMutation({
-    mutationFn: (n: string) => mockApi.renameWatchlist(watchlist.id, n),
+    mutationFn: (n: string) => api.renameWatchlist(watchlist.id, n),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["watchlists"] })
       setOpen(false)
@@ -331,7 +331,7 @@ function DeleteWatchlistDialog({ watchlist }: { watchlist: Watchlist }) {
   const [open, setOpen] = useState(false)
 
   const deleteMutation = useMutation({
-    mutationFn: () => mockApi.deleteWatchlist(watchlist.id),
+    mutationFn: () => api.deleteWatchlist(watchlist.id),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["watchlists"] })
       setOpen(false)
@@ -397,7 +397,7 @@ function WatchlistPanel({
 
   const removeMutation = useMutation({
     mutationFn: (companyId: string) =>
-      mockApi.removeFromWatchlist(watchlist.id, companyId),
+      api.removeFromWatchlist(watchlist.id, companyId),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["watchlists"] })
     },
@@ -472,12 +472,12 @@ export default function WatchlistsPage() {
 
   const { data: watchlists, isLoading } = useQuery({
     queryKey: ["watchlists"],
-    queryFn: () => mockApi.listWatchlists(),
+    queryFn: () => api.listWatchlists(),
   })
 
   const { data: allCompanies } = useQuery({
     queryKey: ["companies-all"],
-    queryFn: () => mockApi.listCompanies(),
+    queryFn: () => api.listCompanies(),
   })
 
   const companies: CompanyListItem[] = allCompanies ?? []

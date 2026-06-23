@@ -7,11 +7,14 @@ import {
   Bell,
   Building2,
   GaugeCircle,
+  GitCompare,
+  Landmark,
   LayoutDashboard,
   ListChecks,
+  Network,
   Search,
 } from "lucide-react"
-import { mockApi } from "@/lib/mock-api"
+import { api } from "@/lib/api"
 import {
   CommandDialog,
   CommandEmpty,
@@ -26,6 +29,9 @@ import { formatKRWShort } from "@/lib/utils"
 const NAV = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "Company Search", href: "/companies", icon: Building2 },
+  { label: "Investors", href: "/investors", icon: Landmark },
+  { label: "Network", href: "/network", icon: Network },
+  { label: "Compare", href: "/compare", icon: GitCompare },
   { label: "Watchlists", href: "/watchlists", icon: ListChecks },
   { label: "Alerts", href: "/alerts", icon: Bell },
   { label: "Calibration", href: "/calibration", icon: GaugeCircle },
@@ -48,7 +54,11 @@ export function CommandPaletteProvider({
   const router = useRouter()
   const { data: companies = [] } = useQuery({
     queryKey: ["search-index"],
-    queryFn: () => mockApi.searchIndex(),
+    queryFn: () => api.searchIndex(),
+  })
+  const { data: investors = [] } = useQuery({
+    queryKey: ["investors-index"],
+    queryFn: () => api.listInvestors(),
   })
 
   React.useEffect(() => {
@@ -103,6 +113,21 @@ export function CommandPaletteProvider({
                   {c.latest_valuation_krw
                     ? formatKRWShort(c.latest_valuation_krw)
                     : c.stage}
+                </span>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+          <CommandGroup heading="Investors">
+            {investors.map((inv) => (
+              <CommandItem
+                key={inv.name}
+                value={`investor ${inv.name}`}
+                onSelect={() => go(`/investors/${encodeURIComponent(inv.name)}`)}
+              >
+                <Landmark className="h-4 w-4 text-muted-foreground" />
+                <span className="font-medium">{inv.name}</span>
+                <span className="ml-auto text-2xs text-muted-foreground tnum">
+                  {inv.companyCount}개사
                 </span>
               </CommandItem>
             ))}

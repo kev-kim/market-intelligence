@@ -8,12 +8,15 @@ import {
   Bell,
   Building2,
   GaugeCircle,
+  GitCompare,
+  Landmark,
   LayoutDashboard,
   ListChecks,
+  Network,
   Activity,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { mockApi } from "@/lib/mock-api"
+import { api, IS_DEMO } from "@/lib/api"
 import { ThemeToggle } from "@/components/theme-toggle"
 import {
   CommandPaletteProvider,
@@ -24,6 +27,9 @@ import { Badge } from "@/components/ui/badge"
 const NAV = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "Companies", href: "/companies", icon: Building2 },
+  { label: "Investors", href: "/investors", icon: Landmark },
+  { label: "Network", href: "/network", icon: Network },
+  { label: "Compare", href: "/compare", icon: GitCompare },
   { label: "Watchlists", href: "/watchlists", icon: ListChecks },
   { label: "Alerts", href: "/alerts", icon: Bell },
   { label: "Calibration", href: "/calibration", icon: GaugeCircle },
@@ -49,7 +55,7 @@ function Sidebar() {
   const pathname = usePathname()
   const { data: alerts = [] } = useQuery({
     queryKey: ["alerts"],
-    queryFn: () => mockApi.listAlerts(),
+    queryFn: () => api.listAlerts(),
   })
   const unread = alerts.filter((a) => !a.read_at).length
 
@@ -110,7 +116,7 @@ function Topbar() {
         <CommandTrigger />
       </div>
       <Badge variant="muted" className="hidden sm:inline-flex">
-        Demo · mock data
+        {IS_DEMO ? "Demo · mock data" : "Live · API"}
       </Badge>
       <ThemeToggle />
     </header>

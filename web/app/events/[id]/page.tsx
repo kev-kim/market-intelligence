@@ -14,7 +14,7 @@ import {
   UserPlus,
   type LucideIcon,
 } from "lucide-react"
-import { mockApi } from "@/lib/mock-api"
+import { api } from "@/lib/api"
 import type { EventPayload, EventType } from "@/lib/types"
 import { EVENT_TYPE_LABEL, eventHeadlineAmount } from "@/lib/format"
 import { cn, formatDate, formatKRWShort } from "@/lib/utils"
@@ -180,12 +180,12 @@ export default function EventDetailPage({
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["event", id],
-    queryFn: () => mockApi.getEvent(id),
+    queryFn: () => api.getEvent(id),
   })
 
   const { data: bundle, isLoading: sourcesLoading } = useQuery({
     queryKey: ["event-sources", id],
-    queryFn: () => mockApi.getEventSources(id),
+    queryFn: () => api.getEventSources(id),
     enabled: !!data,
   })
 
