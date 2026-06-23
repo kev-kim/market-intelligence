@@ -10,11 +10,6 @@ const nextConfig = {
   // basePath auto-prefixes all routes, <Link>/router navigations, and /_next
   // assets, so the app is correctly addressable when proxied under the prefix.
   basePath: basePath || undefined,
-  // Config redirects ARE basePath-aware (unlike a server-component redirect()),
-  // so "/" → "/dashboard" becomes "/kci" → "/kci/dashboard" when prefixed.
-  async redirects() {
-    return [{ source: "/", destination: "/dashboard", permanent: false }]
-  },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000",
     NEXT_PUBLIC_BASE_PATH: basePath,
